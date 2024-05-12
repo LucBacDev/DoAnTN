@@ -8,7 +8,7 @@ use DB;
 class Product_attrs extends Model
 {
     use HasFactory;
-    protected $fillable = ['product_id','attribute_size_id','attribute_color_id'];
+    protected $fillable = ['product_id','attribute_color_id','image','stock','price'];
 
     public function getColor($attribute_color_id)
     {

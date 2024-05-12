@@ -10,5 +10,5 @@ class Attributes extends Model
     use HasFactory;
     protected $fillable = ['name','value','type'];
 
-    
+
 }

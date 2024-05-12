@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('product_attrs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned();
-            $table->bigInteger('attribute_color_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->string('attribute_value');
+            $table->string('attribute_name');
             $table->string('image',255);
-            $table->integer('stock')->unsigned();
-            $table->foreign('attribute_color_id')->references('id')->on('attributes');
+            $table->bigInteger('price')->unsigned();
+            $table->bigInteger('stock')->unsigned();
             $table->timestamps();
         });
     }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thế Anh Mobile</title>
+    <title>ESSENSE</title>
     <link rel="icon" href="{{ url('assets-user') }}/img/core-img/favicon.ico">
     <link rel="stylesheet" href="{{ url('assets-user') }}/css/style.css">
 </head>
@@ -21,7 +21,7 @@
                     <nav class="nav-mie d-flex">
                         <!-- logo -->
                         <a href="{{ route('user.index') }}" class="logo-header">
-                            <img src="{{ url('assets-user') }}/img/theanh.png" alt="" style="object-fit: cover; max-width: 150px; max-height: 200px;">
+                            <img src="{{ url('assets-user') }}/img/core-img/logo.png" alt="" style="object-fit: cover; max-width: 150px; max-height: 200px;">
                         </a>
                         <!-- end logo -->
                         <div class="nav-menu">
@@ -415,11 +415,10 @@
                     <div class="single_widget_area d-flex mb-30">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="#"><img src="img/core-img/logo2.png" alt=""></a>
+                            <img src="{{ url('assets-user') }}/img/core-img/logo.png" alt="" style="object-fit: cover; max-width: 150px; max-height: 200px;">
                         </div>
                         <!-- Footer Menu -->
                         <div class="footer_menu">
-                            <img src="{{ url('assets-user') }}/img/theanh.png" alt="" style="object-fit: cover; max-width: 150px; max-height: 200px;">
                             <ul style="color: aliceblue">
                                 <li>Số điện thoại: 0949191750</li>
                                 <li>Địa chỉ: 41 Phố Nguyễn Hoàng, Mỹ Đình 2, Từ Liêm, Hà Nội</li>

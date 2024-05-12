@@ -15,19 +15,11 @@
                         @csrf
                         <div class="form-group col-md-3 ">
                             <label class="control-label">Tên Thuộc Tính</label>
-                            <select class="form-control inputchange" value="name" name="name" required>
-                                <option class="Color" value="Color">Color</option>
-                                <option value="Size">Size</option>
-                            </select>
+                            <input class="form-control v1" type="text" name="name" value="{{$Attribute->name}}">
                         </div>
-                        <div class="form-group col-md-3 value_color">
-                            <label class="control-label">Gía Trị</label>
-                            <input class="form-control v1" type="color" name="value">
-                        </div>
-                        <div class="form-group col-md-3 value_size d-none">
-                            <label class="control-label">Gía Trị</label>
-                            <input class="form-control v2" type="text" name="">
-                        </div>
+                        @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         
                         <div class="form-group ">
                             <td class="table-td-center">

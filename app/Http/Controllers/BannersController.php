@@ -22,12 +22,11 @@ class BannersController extends Controller
         $Category = Categories::all();
         return view('admin.pages.banners_add', compact('Category'));
     }
-    
+
     public function banners_create(BannerRequest $req)
     {
-        
         if ($req->hasFile('image')) {
-            
+
             $file = $req->image;
             // get name
             $file_name = $file->getClientOriginalName();
@@ -36,7 +35,7 @@ class BannersController extends Controller
         } else {
             $file_name = '';
         }
-        
+
             Banner::create([
                 'name' => $req->name,
                 'image' => $file_name,
@@ -44,7 +43,7 @@ class BannersController extends Controller
                 'category_id'=>$req-> category_id
             ]);
             return redirect()->route('admin.banners')->with('notification', 'Thêm mới thành công');
-        
+
     }
 
     // show brands
@@ -83,7 +82,12 @@ class BannersController extends Controller
     // delete brands
     public function banners_delete($id)
     {
-        $Banner = Banner::find($id)->delete();
-        return redirect()->back()->with('notification','Xóa Thành Công');
+        $Banner = Banner::find($id);
+        if ($Banner){
+           $Banner->delete();
+            return redirect()->route('admin.company')->with('notification', 'Xóa Thành Công');
+        }else{
+            return redirect()->route('admin.company')->with('notification', 'Banner không tồn tại');
+    }
     }
 }

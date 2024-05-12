@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('email', 255);
             $table->string('token', 255)->nullable();
             $table->bigInteger('payment_method')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

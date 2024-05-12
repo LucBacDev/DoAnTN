@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_details', function (Blueprint $table) {
+        Schema::create('attribute_groups', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('pro_id')->unsigned();
-            $table->bigInteger('order_id')->unsigned();
-            $table->string('name', 255);
-            $table->integer('quantity')->unsigned();
-            $table->integer('unit_price');
-            $table->tinyInteger('status')->nullable();
+            $table->string('name',255);
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_details');
+        Schema::dropIfExists('attribute_groups');
     }
 };

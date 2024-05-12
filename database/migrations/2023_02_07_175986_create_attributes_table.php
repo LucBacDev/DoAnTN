@@ -15,6 +15,7 @@ class CreateAttributesTable extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
+            $table->integer('attribute_group_id');
             $table->string('name',255);
             $table->timestamps();
         });

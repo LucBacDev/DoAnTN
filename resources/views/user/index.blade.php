@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="product-heading text-center">
-                        <h2>Điện thoại bán chạy</h2>
+                        <h2>Quần áo bán chạy</h2>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
                                     <div class="add-to-cart-btn">
-                                        <a href="{{ route('product', $value->id) }}" class="btn essence-btn check-btn">Xem điện thoại</a>
+                                        <a href="{{ route('product', $value->id) }}" class="btn essence-btn check-btn">Xem quần áo</a>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
     </section>
     <!-- new product end  -->
 
-    <!-- banner info  -->
+    {{-- <!-- banner info  -->
     <div class="banner-info">
         <div class="container-fuild">
             <div class="row">
@@ -99,7 +99,7 @@
             </div>
         </div>
     </div>
-    <!-- banner info end -->
+    <!-- banner info end --> --}}
 
     <!-- new product 2 -->
     <section class="new_arrivals_area padding-80">
@@ -107,7 +107,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="product-heading text-center">
-                        <h2>Điện thoại mới</h2>
+                        <h2>Quần áo mới</h2>
                     </div>
                 </div>
             </div>

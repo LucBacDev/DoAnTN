@@ -154,6 +154,7 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::get('/attribute_add', [AttributeController::class,'attribute_add'])->name('admin.attribute_add');
     Route::post('/attribute_add', [AttributeController::class,'attribute_create'])->name('admin.attribute_create');
     Route::get('/attribute_update_show/{id}', [AttributeController::class,'attribute_update_show'])->name('admin.attribute_update_show');
+    Route::post('/attribute_update_show/{id}', [AttributeController::class, 'attribute_update'])->name('admin.attribute_update');
     Route::get('/attribute_delete/{id}', [AttributeController::class, 'attribute_delete'])->name('admin.attribute_delete');
 
 });

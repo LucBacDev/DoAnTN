@@ -19,9 +19,8 @@ class CreateBannersTable extends Migration
             $table->bigInteger('category_id')->unsigned();
             $table->string('image',255);
             $table->tinyInteger('status')->default(1);
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
-            
+
         });
     }
 
