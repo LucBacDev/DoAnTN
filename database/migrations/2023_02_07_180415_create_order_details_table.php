@@ -18,6 +18,8 @@ return new class extends Migration
             $table->bigInteger('pro_id')->unsigned();
             $table->bigInteger('order_id')->unsigned();
             $table->string('name', 255);
+            $table->string('color', 255);
+            $table->string('size', 255);
             $table->integer('quantity')->unsigned();
             $table->integer('unit_price');
             $table->tinyInteger('status')->nullable();

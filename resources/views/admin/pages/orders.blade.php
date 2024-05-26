@@ -2,7 +2,7 @@
 @section('content')
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><h1>Danh sách đơn hàng</h1></a></li>
         </ul>
         <div id="clock"></div>
     </div>
@@ -42,8 +42,9 @@
                                     <td>{{ $item->created_at }}</td>
 
                                     <td>{{ $item->note }}</td>
-                                    <td><a href="{{ route('admin.view_product', $item->id) }}" class="btn btn-info">Chi Tiết</a></td>
-                            
+                                    <td><a href="{{ route('admin.view_product', $item->id) }}" class="btn btn-info">Chi Tiết</a>
+                                   <a href="{{ route('admin.orders_delete', $item->id) }}" type="submit"
+                                        class="btn btn-danger" onclick = "return confirm('Bạn có muốn xóa?')">Xóa</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

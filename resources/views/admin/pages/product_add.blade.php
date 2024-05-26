@@ -21,6 +21,18 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Danh Mục</label>
+                            <select class="form-control" name="category_id" value="{{ old('category_id') }}">
+                                <option value="null">-- Chọn Danh mục --</option>
+                                @foreach ($category as $value)
+                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="form-group  col-md-3">
                             <label class="control-label">Giá</label>
                             <input class="form-control" type="text" name="price" value="{{ old('price') }}">
@@ -35,65 +47,7 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group  col-md-3">
-                            <label class="control-label">Xuất Xứ</label>
-                            <input class="form-control" type="text" name="origin" value="{{ old('origin') }}">
-                            @error('origin')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group  col-md-3">
-                            <label class="control-label">Năm Sản Xuất</label>
-                            <input class="form-control" type="text" name="year" value="{{ old('year') }}">
-                            @error('year')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="exampleSelect1" class="control-label">Danh Mục</label>
-                            <select class="form-control" id="exampleSelect1" name="category_id"
-                                value="{{ old('category_id') }}">
-                                <option value="null">-- Chọn Danh mục --</option>
-                                @foreach ($category as $value)
-                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('category_id')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <label for="exampleSelect1" class="control-label">Thương Hiệu</label>
-                            <select class="form-control" id="exampleSelect1" name="brand_id">
-                                <option>-- Chọn Thương hiệu --</option>
-                                @foreach ($brand as $value)
-                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('brand_id')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group col-md-3 ">
-                            <label for="exampleSelect1" class="control-label">Trạng Thái</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" value="1"
-                                    id="flexRadioDefault1">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Đang bán
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="status" value="0"
-                                    id="flexRadioDefault2">
-                                <label class="form-check-label" for="flexRadioDefault2">Ngừng bán</label>
-                            </div>
-                            @error('status')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                      
                         <div class="form-group  col-md-12">
                             <label class="control-label">Mô tả</label>
                             <textarea id="editor1" rows="10" cols="80" form="usrform" name="description"
@@ -121,43 +75,50 @@
                                 onchange="previewImage(this, 'description-images-preview');" />
                             <div id="description-images-preview"></div>
                         </div>
-                        <table id="attribute-table">
-                            <thead>
-                                <tr>
-                                    <th>Chọn thuộc tính</th>
-                                    <th>Chọn ảnh cho thuộc tính</th>
-                                    <th>Số lượng</th>
-                                    <th>Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="attribute-row">
-                                    <td>
-                                        <select name="attributes[]" class="">
-                                            <option value="">-- Chọn thuộc tính --</option>
-                                            @foreach ($attribute as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        <h3>Thông tin bán hàng</h3>
+                        <div class="tile-body">
+                            <div id="category-container">
+                                <div class="form-nhap-phan-loai">
+                                    <label class="control-label">Nhóm phân loại màu sắc</label>
+                                    <div class="classify-merchandise-color d-flex my-3 color">
+                                        <select class="form-control phanloai" id="exampleSelect2" name="name_attribute[]"
+                                            data-index="">
+                                            <option value="null">Chọn phân loại màu sắc</option>
+                                            @foreach ($attribute_color as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}
+                                                </option>
                                             @endforeach
                                         </select>
-                                    </td>
-                                    <td>
-                                        <input type="file" name="images2[]" class="image"
-                                            value="{{ old('images2') }}"
-                                            onchange="previewImages(this, 'image-preview-3')" />
-                                        <div id="image-preview-3"></div>
-                                        @error('images')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </td>
-                                    <td><input type="number" name="stocks[]" /></td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger remove-row">Xóa</button>
-                                        <button type="button" class="btn btn-primary add-row">Thêm</button>
-                                    </td>
-                                </tr>
+                                        <button type="button" class="delete-classify-merchandise-color"
+                                            style="border-radius: 5px;cursor: pointer;">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                    <button type="button" class="add-classify-merchandise-color">Thêm phân loại
+                                        màu sắc</button>
+                                </div>
 
-                            </tbody>
-                        </table>
+                                <div class="form-nhap-phan-loai">
+                                    <label class="control-label">Nhóm phân loại size </label>
+                                    <div class="classify-merchandise d-flex my-3 size">
+                                        <select class="form-control phanloai" id="exampleSelect4" name="name_attribute[]"
+                                            data-index="">
+                                            <option value="null">Chọn phân loại size</option>
+                                            @foreach ($attribute_size as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <button type="button" class="delete-classify-merchandise-size"
+                                            style="border-radius: 5px;cursor: pointer;">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                    <button type="button" class="add-classify-merchandise-size">Thêm phân loại
+                                        size</button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group d-flex justify-content-center">
                             <div class="text-center" style="margin: 20px 20px">
                                 <button type="submit" class="btn btn-success">Lưu</button>
@@ -167,65 +128,159 @@
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-@section('src')
-    <script src="{{ url('assets-admin') }}/ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor1');
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelector('#attribute-table').addEventListener('click', function(event) {
-                if (event.target.classList.contains('remove-row')) {
-                    const row = event.target.closest('.attribute-row');
-                    row.parentNode.removeChild(row);
-                } else if (event.target.classList.contains('add-row')) {
-                    const newRow = document.querySelector('.attribute-row').cloneNode(true);
-                    document.querySelector('#attribute-table tbody').appendChild(newRow);
-                }
-            });
-        });
+                @section('src')
+                    <script src="{{ url('assets-admin') }}/ckeditor/ckeditor.js"></script>
+                    <script>
+                        CKEDITOR.replace('editor1');
 
-        function previewImage(input, divId) {
-            var preview = document.getElementById(divId);
-            preview.innerHTML = '';
+                        function previewImage(input, divId) {
+                            var preview = document.getElementById(divId);
+                            preview.innerHTML = '';
 
-            if (input.files && input.files.length > 0) {
-                for (var i = 0; i < input.files.length; i++) {
-                    var reader = new FileReader();
+                            if (input.files && input.files.length > 0) {
+                                for (var i = 0; i < input.files.length; i++) {
+                                    var reader = new FileReader();
 
-                    reader.onload = function(event) {
-                        var image = document.createElement('img');
-                        image.src = event.target.result;
-                        image.style.width = '100px'; // Thiết lập kích thước ảnh
-                        preview.appendChild(image);
-                    }
+                                    reader.onload = function(event) {
+                                        var image = document.createElement('img');
+                                        image.src = event.target.result;
+                                        image.style.width = '100px';
+                                        preview.appendChild(image);
+                                    }
 
-                    reader.readAsDataURL(input.files[i]);
-                }
-            }
-        }
+                                    reader.readAsDataURL(input.files[i]);
+                                }
+                            }
+                        }
 
-        function previewImages(input, divId) {
-            var preview = input.closest('.attribute-row').querySelector('#' + divId);
-            preview.innerHTML = '';
 
-            if (input.files && input.files.length > 0) {
-                for (var i = 0; i < input.files.length; i++) {
-                    var reader = new FileReader();
+                        var container = document.getElementById("category-container");
+                        container.addEventListener('click', function(event) {
+                            var target = event.target;
+                            let countColor = document.querySelectorAll('.classify-merchandise-color').length;
 
-                    reader.onload = function(event) {
-                        var image = document.createElement('img');
-                        image.src = event.target.result;
-                        image.style.width = '100px'; // Thiết lập kích thước ảnh
-                        preview.appendChild(image);
-                    }
+                            if (target.classList.contains("add-classify-merchandise-color")) {
+                                // Tạo một thẻ div mới chứa phần tử mới
+                                countColor++;
+                                var newDiv = document.createElement('div');
+                                newDiv.className = 'classify-merchandise-color d-flex my-3';
+                                // Tạo phần tử select mới
+                                var selectElement = document.createElement('select');
+                                selectElement.className = 'form-control';
+                                selectElement.id = 'exampleSelect2';
+                                selectElement.name = 'name_attribute[]';
 
-                    reader.readAsDataURL(input.files[i]);
-                }
-            }
-        }
-    </script>
-@endsection
-@endsection
+                                // Tạo một option mặc định
+                                var defaultOption = document.createElement('option');
+                                defaultOption.value = 'null';
+                                defaultOption.textContent = 'Chọn phân loại màu sắc';
+                                selectElement.appendChild(defaultOption);
+
+                                var groupId = 1;
+                                // Thêm option từ danh sách attribute dựa trên groupId
+                                @foreach ($attribute as $item)
+                                    var item = @json($item);
+                                    if (item.attribute_group_id == groupId) {
+                                        var option = document.createElement("option");
+                                        option.value = '{{ $item->id }}';
+                                        option.textContent = '{{ $item->name }}';
+                                        selectElement.appendChild(option);
+                                    }
+                                @endforeach
+
+
+
+                                // Tạo nút xóa
+                                var deleteButton = document.createElement('button');
+                                deleteButton.type = 'button';
+                                deleteButton.className = 'delete-classify-merchandise-color';
+                                deleteButton.style.borderRadius = '5px';
+                                deleteButton.style.cursor = 'pointer';
+                                deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+
+                                // Thêm select và nút xóa vào thẻ div mới
+                                newDiv.appendChild(selectElement);
+                                newDiv.appendChild(deleteButton);
+
+                                // Tìm tất cả các phần tử "Phân loại hàng" hiện có
+
+                                var classifyMerchandises = document.querySelectorAll('.classify-merchandise-color');
+                                // Lấy phần tử "Phân loại hàng" cuối cùng và chèn thẻ div mới vào sau nó
+                                var lastClassifyMerchandise = classifyMerchandises[classifyMerchandises.length - 1];
+                                lastClassifyMerchandise.parentNode.insertBefore(newDiv, lastClassifyMerchandise.nextSibling);
+
+                                console.log(countColor);
+                            } else if (target.classList.contains("delete-classify-merchandise-color")) {
+                                console.log(countColor);
+                                if (countColor == 1) {
+                                    alert("Không thể xóa phân loại cuối cùng!");
+                                } else {
+                                    target.parentNode.remove();
+                                    countColor--;
+                                }
+                            }
+                            let countSize = document.querySelectorAll('.classify-merchandise').length;
+                            if (target.classList.contains("add-classify-merchandise-size")) {
+                                // Tạo một thẻ div mới chứa phần tử mới
+                                countSize++;
+                                var newDiv = document.createElement('div');
+                                newDiv.className = 'classify-merchandise d-flex my-3 size';
+
+                                // Tạo phần tử select mới
+                                var selectElement = document.createElement('select');
+                                selectElement.className = 'form-control';
+                                selectElement.id = 'exampleSelect2';
+                                selectElement.name = 'name_attribute[]';
+
+                                // Tạo một option mặc định
+                                var defaultOption = document.createElement('option');
+                                defaultOption.value = 'null';
+                                defaultOption.textContent = 'Chọn phân loại size';
+                                selectElement.appendChild(defaultOption);
+
+                                // Lấy giá trị của option được chọn trong select1
+                                var groupId = 2;
+                                // Thêm option từ danh sách attribute dựa trên groupId
+                                @foreach ($attribute as $item)
+                                    var item = @json($item);
+                                    if (item.attribute_group_id == groupId) {
+                                        var option = document.createElement("option");
+                                        option.value = '{{ $item->id }}';
+                                        option.textContent = '{{ $item->name }}';
+                                        selectElement.appendChild(option);
+                                    }
+                                @endforeach
+
+
+                                // Tạo nút xóa
+                                var deleteButton = document.createElement('button');
+                                deleteButton.type = 'button';
+                                deleteButton.className = 'delete-classify-merchandise-size';
+                                deleteButton.style.borderRadius = '5px';
+                                deleteButton.style.cursor = 'pointer';
+                                deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+
+                                // Thêm select và nút xóa vào thẻ div mới
+                                newDiv.appendChild(selectElement);
+                                newDiv.appendChild(deleteButton);
+
+                                // Tìm tất cả các phần tử "Phân loại hàng" hiện có
+                                var classifyMerchandises = document.querySelectorAll('.classify-merchandise');
+
+                                // Lấy phần tử "Phân loại hàng" cuối cùng và chèn thẻ div mới vào sau nó
+                                var lastClassifyMerchandise = classifyMerchandises[classifyMerchandises.length - 1];
+                                lastClassifyMerchandise.parentNode.insertBefore(newDiv, lastClassifyMerchandise.nextSibling);
+                                console.log(countSize);
+                            } else if (target.classList.contains("delete-classify-merchandise-size")) {
+                                if (countSize === 1) {
+                                    alert("Không thể xóa phân loại cuối cùng!");
+                                } else {
+                                    console.log(countSize);
+                                    target.parentNode.remove(); // Xóa phần tử khi nút xóa được click
+                                    countSize--;
+                                }
+                            }
+                        });
+                    </script>
+                @endsection
+            @endsection

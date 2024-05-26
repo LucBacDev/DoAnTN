@@ -2,7 +2,7 @@
 @section('content')
     <div class="app-title d-flex justify-content-between">
         <ul class="app-breadcrumb breadcrumb side ">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách danh mục</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><h1>Danh sách danh mục</h1></a></li>
         </ul>
         <ul class="app-breadcrumb breadcrumb side ">
             <li class="breadcrumb-item active">

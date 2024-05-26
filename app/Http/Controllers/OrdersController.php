@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attributes;
+use App\Models\Product_attribute;
 use App\Models\Product_attrs;
+use App\Models\Product_combination;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use App\Models\Orders;
@@ -34,14 +36,15 @@ class OrdersController extends Controller
         $order_detail = Order_details::where('order_id', $id)->get();
         $order = Orders::find($id);
         $user = Users::where('id',$order->user_id)->first();
-        $product_atb = Product_attrs::all();
-        $attribute = Attributes::all();
+        $product_atb = Product_attribute::all();
+        $product_cb = Product_combination::all();
         $total_price = 0;
         foreach ($order_detail as $value) {
             $total_price = $total_price + $value->unit_price;
         }
+        $attribute = Attributes::all();
         $total = $total_price+30000;
-        return view('admin.pages.view_product',compact('order_detail','order','user','product_atb','attribute','total_price','total'));
+        return view('admin.pages.view_product',compact('order_detail','order','user','product_atb','product_cb','total_price','total','attribute'));
     }
 
     /**
@@ -95,8 +98,10 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function orders_delete($id)
     {
-        //
+        $Orders_detail = Order_details::where('order_id',$id)->delete();
+        $Orders = Orders::find($id)->delete();
+        return redirect()->with('notification','Xóa Thành Công');
     }
 }

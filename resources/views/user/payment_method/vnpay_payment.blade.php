@@ -1,22 +1,24 @@
 @extends('master_user')
 @section('payment')
-    <div class="container">
+   
         <div class="table-responsive">
+            <div class="container" style="margin-top: 50px">
             <form action="{{ route('vnpay') }}" method="post">
                 @csrf
-                <div class="form-group">
+                <div class="form-group" style="margin-top: 20px">
                     <div class="form-group">
                         <label for="Amount">Số tiền</label>
                         <input class="form-control" data-val="true" data-val-number="The field Amount must be a number."
                             data-val-required="The Amount field is required." id="Amount" name="Amount" type="text"
-                            value="10000" />
+                            value="{{$total_price}}" />
                     </div>
+                    <input type="hidden" value="{{$order_id}}" name="order_id">
                     <div class="form-group">
                         <label for="OrderDescription">Nội dung thanh toán</label>
                         <textarea class="form-control" cols="20" id="OrderDescription" name="OrderDescription" rows="2">
-Thanh toan don hang thoi gian: 2023-09-17 11:29:13</textarea>
+Thanh toan don hang {{$order_id}}</textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top: 20px;margin-bottom: 20px">
                         <label for="bankcode">Ngân hàng</label>
                         <select name="bankcode" id="bankcode" class="form-control">
                             <option value="">Không chọn </option>
@@ -58,16 +60,34 @@ Thanh toan don hang thoi gian: 2023-09-17 11:29:13</textarea>
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-default" name="redirect">Thanh toán</button>
+                    <button type="submit" class="btn btn-default" name="redirect" style="margin-bottom: 50px">Thanh toán</button>
             </form>
         </div>
         <p>
             &nbsp;
         </p>
 
-        <footer class="footer">
-            <p>&copy; VNPAY 2023</p>
-        </footer>
+        <style>
+            .btn-default {
+    background-color: #4CAF50; /* Màu nền ban đầu */
+    border: none; /* Bỏ viền */
+    color: white; /* Màu chữ */
+    padding: 15px 32px; /* Đệm trong */
+    text-align: center; /* Căn giữa chữ */
+    text-decoration: none; /* Bỏ gạch chân */
+    display: inline-block; /* Hiển thị dạng khối nội tuyến */
+    font-size: 16px; /* Kích thước chữ */
+    margin: 4px 2px; /* Khoảng cách ngoài */
+    cursor: pointer; /* Đổi con trỏ khi hover */
+    border-radius: 12px; /* Bo góc */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu mượt */
+}
+
+/* CSS cho hiệu ứng hover */
+.btn-default:hover {
+    background-color: #008CBA; /* Màu nền khi hover */
+}
+        </style>
     </div> <!-- /container -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/tryitnow/Styles/js/ie10-viewport-bug-workaround.js"></script>

@@ -22,6 +22,34 @@
                         <!-- ##### Single Widget ##### -->
                         <div class="widget catagory mb-50">
                             <!-- Widget Title -->
+                            <h6 class="widget-title mb-30">Danh mục</h6>
+                            <!--  Catagories  -->
+                            <div class="catagories-menu">
+                                <ul id="menu-content2" class="menu-content collapse show">
+                                    <!-- Single Item -->
+                                    @foreach ($Categories as $item)
+                                          <li data-toggle="collapse" data-target="#clothing">
+                                        
+                                        <a href="#" class="menu-title1">
+                                            @if ($item->parent_id == 0)
+                                                <p>{{$item->name}}</p>
+                                            @endif
+                                        </a>
+                                        <ul class="sub-menu collapse show" id="clothing">
+                                            @foreach ($Categories as $value)
+                                                @if ($value->parent_id == $item->id)
+                                                <li><a href="{{ route('search_id', ['id' => $value->id]) }}">{{$value->name}}</a></li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                    @endforeach
+                                  
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="widget catagory mb-50">
+                            <!-- Widget Title -->
                             <h6 class="widget-title" style="margin-bottom: 0px">Lọc giá</h6>
                             <form id="searchForm" action="{{ route('search') }}" method="GET">
                                 <div class="form-group" style="display: flex; flex-direction: column">
@@ -52,14 +80,7 @@
                                     </div>
                                     <!-- Thêm các mức giá khác tùy ý -->
                                 </div>
-                                <h6 class="widget-title" style="margin-bottom: 0px">Hãng</h6>
-                                <select class="form-control" id="brand" name="brand" style="margin: 10px 0">
-                                    <option value="all">Tất cả</option>
-                                    @foreach ($Brand as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                    <!-- Thêm các option cho các hãng khác tùy ý -->
-                                </select>
+                              
                                 <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                             </form>
                            
@@ -103,7 +124,6 @@
                                         </div>
                                         <!-- Product Description -->
                                         <div class="product-description">
-                                            <span>{{ $value->getBrandName->name }}</span>
                                             <a href="{{ route('product', $value->id) }}">
                                                 <h6>{{ $value->name }}</h6>
                                             </a>

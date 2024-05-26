@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->tinyInteger('status')->nullable();
-            $table->double('total_quantity')->unsigned();
-            $table->double('total_price', 8 ,2)->unsigned();
+            $table->bigInteger('total_quantity')->unsigned();
+            $table->bigInteger('total_price')->unsigned();
             $table->string('note', 255)->nullable();
             $table->string('phone', 20);
             $table->string('address', 255);

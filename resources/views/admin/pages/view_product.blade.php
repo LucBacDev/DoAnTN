@@ -30,6 +30,7 @@
                             <th>Tên Sản phẩm</th>
                             <th>Số lượng</th>
                             <th>Màu sắc</th>
+                            <th>Kích cỡ</th>
                             <th>Giá tiền</th>
                         </tr>
                     </thead>
@@ -38,15 +39,8 @@
                             <tr>
                             <td>{{$item->name}}</td>
                             <td>{{$item->quantity}}</td>
-                            @foreach ($product_atb as $value)
-                                @if ($item->pro_id == $value->id)
-                                    @foreach ($attribute as $query)
-                                        @if ($value->attribute_color_id == $query->id)
-                                            <td>{{$query->name}}</td>
-                                        @endif
-                                    @endforeach
-                                @endif
-                            @endforeach
+                            <td>{{$item->color}}</td>
+                            <td>{{$item->size}}</td>
                             <td>{{ number_format($item->unit_price)}}đ</td>
                             
                         </tr>

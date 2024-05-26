@@ -40,6 +40,8 @@ Route::get('/logout', [LoginController::class,'logout'])->name('logout');
 
 //------- register ----------//
 Route::get('/register', [LoginController::class,'register'])->name('register');
+Route::get('/edit-user/{id}', [UserController::class,'edit_user'])->name('edit-user');
+Route::post('/edit-user/{id}', [UserController::class,'update_user'])->name('update-user');
 
 Route::post('/register', [LoginController::class,'register_create']);
 
@@ -85,10 +87,13 @@ Route::get('/accept-order/{id}/{token}', [MailController::class,'accept'])->name
 
 
 //--------------Thanh toán VNpay--------------------//
-Route::post('/vn-pay', [PaymentController::class,'index'])->name('vnpay_payment');
+Route::get('/vn-pay', [PaymentController::class,'index'])->name('vnpay_payment');
 Route::post('/vn-pay', [PaymentController::class,'vnpay_payment'])->name('vnpay');
+Route::get('/vn-pay/return', [PaymentController::class,'vnpay_return'])->name('vnpay_return');
 
 
+//--------------Cart User--------------------//
+Route::get('/user/{id}', [UserController::class,'cart'])->name('user.cart');
 
 
 
@@ -109,17 +114,22 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     Route::post('/category_update_show/{id}', [CategorysController::class, 'category_update'])->name('admin.category_update');
     Route::get('/category_delete/{id}', [CategorysController::class, 'category_delete'])->name('admin.category_delete');
 
-     // List Account
-     Route::get('/account', [AccountsController::class, 'account'])->name('admin.account');
-     Route::get('/account_update/{id}', [AccountsController::class, 'account_update'])->name('admin.account_update');
-     Route::get('/account_delete/{id}', [AccountsController::class, 'account_delete'])->name('admin.account_delete');
+    Route::middleware('manager')->group(function(){
+   // List Account
+   Route::get('/account', [AccountsController::class, 'account'])->name('admin.account');
+   Route::get('/account_update/{id}', [AccountsController::class, 'account_update'])->name('admin.account_update');
+   Route::get('/account_delete/{id}', [AccountsController::class, 'account_delete'])->name('admin.account_delete');
+    });
+  
 
     // List Product
     Route::get('/product', [ProductsController::class, 'product'])->name('admin.product');
+    Route::get('/product-deitail/{id}', [ProductsController::class, 'product_detail'])->name('admin.product_detail');
     Route::get('/product_add', [ProductsController::class, 'product_add'])->name('admin.product_add');
     Route::post('/product_add', [ProductsController::class, 'product_create'])->name('admin.product_create');
     Route::post('/product_adddd', [ProductsController::class, 'product_add_atb'])->name('admin.product_add_atb');
     Route::get('/product_update_show/{id}', [ProductsController::class, 'product_update_show'])->name('admin.product_update_show');
+    Route::post('/product_update_atb/{id}', [ProductsController::class, 'product_update_atb'])->name('admin.product_update_atb');
     Route::post('/product_update_show/{id}', [ProductsController::class, 'product_update'])->name('admin.product_update');
     Route::get('/product_delete/{id}', [ProductsController::class, 'product_delete'])->name('admin.product_delete');
     // list brands
@@ -148,11 +158,15 @@ Route::prefix('/admin')->middleware('admin')->group(function () {
     // list order
     Route::get('/orders', [OrdersController::class, 'orders'])->name('admin.orders');
     Route::get('/orders-details/{id}', [OrdersController::class, 'view_product'])->name('admin.view_product');
+    Route::get('/orders_delete/{id}', [OrdersController::class, 'orders_delete'])->name('admin.orders_delete');
+
 
     // list attribute
     Route::get('/attribute', [AttributeController::class,'attribute'])->name('admin.attribute');
-    Route::get('/attribute_add', [AttributeController::class,'attribute_add'])->name('admin.attribute_add');
-    Route::post('/attribute_add', [AttributeController::class,'attribute_create'])->name('admin.attribute_create');
+    Route::get('/attribute_add_color', [AttributeController::class,'attribute_add_color'])->name('admin.attribute_add_color');
+    Route::get('/attribute_add_size', [AttributeController::class,'attribute_add_size'])->name('admin.attribute_add_size');
+    Route::post('/attribute_add_color', [AttributeController::class,'attribute_create_color'])->name('admin.attribute_create_color');
+    Route::post('/attribute_add_size', [AttributeController::class,'attribute_create_size'])->name('admin.attribute_create_size');
     Route::get('/attribute_update_show/{id}', [AttributeController::class,'attribute_update_show'])->name('admin.attribute_update_show');
     Route::post('/attribute_update_show/{id}', [AttributeController::class, 'attribute_update'])->name('admin.attribute_update');
     Route::get('/attribute_delete/{id}', [AttributeController::class, 'attribute_delete'])->name('admin.attribute_delete');

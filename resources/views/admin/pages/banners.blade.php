@@ -2,14 +2,14 @@
 @section('content')
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách banners</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><h1>Danh sách banners</h2></a></li>
         </ul>
         <ul class="app-breadcrumb breadcrumb side ">
             <li class="breadcrumb-item active">
                 <form action="{{ route('admin.product') }}" method="get">
                     <div class="input-group z-index-0">
                         <input type="text" name="keyword" class="input-search form-control rounded"
-                            placeholder="Nhập tên hãng" aria-label="Search" aria-describedby="search-addon" />
+                            placeholder="Nhập tên banner" aria-label="Search" aria-describedby="search-addon" />
                         <button type="submit" class="btn-search btn btn-outline-primary">Search</button>
                     </div>
                 </form>

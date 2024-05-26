@@ -2,6 +2,18 @@
 @section('product')
     <!-- product details -->
     <div class="product_details">
+        {{-- allert notification --}}
+        @if (session('notification'))
+            <div id="notification" class="alert alert-success text-center">
+                {{ session('notification') }}
+            </div>
+        @endif
+        <script>
+            setTimeout(function() {
+                document.getElementById('notification').style.display = 'none';
+            }, 10000); // 10 giây
+        </script>
+        {{-- allert notification end --}}
         <div class="container-fuild">
             <div class="row" style="margin-top: 100px">
                 <div class="col-lg-6">
@@ -13,16 +25,6 @@
                                         style="object-fit: cover; max-width: 100%; max-height: 100%;">
                                 </div>
                             @endforeach
-
-                            @foreach ($img as $item)
-                                <div class="item"
-                                    style="width: 380px; height: 429px; overflow: hidden; margin-left:150px">
-                                    <img class="product_image color-{{ $item->attribute_color_id }}"
-                                        src="{{ url('upload.product') }}\{{ $item->image }}" alt=""
-                                        style="object-fit: cover; max-width: 100%; max-height: 100%;">
-                                </div>
-                            @endforeach
-
                         </div>
                         {{-- <div class="d-flex">
                             @foreach ($atbdetail as $item)
@@ -40,18 +42,25 @@
                         </a>
                         <p>
                         <h6>Màu sắc</h6>
-                        </p>
                         <div class="d-flex">
                             @foreach ($atbdetail as $item)
-                                <p data-color-id="{{ $item->attribute_color_id }}"
-                                    data-image="{{ url('upload.product') }}\{{ $item->image }}"
-                                    style="margin-right: 30px; font-weight: bold; cursor: pointer; border: 1px solid transparent; background-color: transparent;"
-                                    onclick="showImage(this)">{{ $item->name }}</p>
+                                @if ($item->attribute_group_id == 1)
+                                    <p data-color-id="{{ $item->attribute_id }}"
+                                        style="margin-right: 30px; font-weight: bold; cursor: pointer; border: 1px solid transparent; background-color: transparent;"
+                                        onclick="showColor(this)">{{ $item->name }}</p>
+                                @endif
                             @endforeach
                         </div>
-                        <span>
-                            <h6>Hãng: </h6>{{ $prodetail->getBrandName->name }}
-                        </span>
+                        <h6>Size</h6>
+                        <div class="d-flex">
+                            @foreach ($atbdetail as $item)
+                                @if ($item->attribute_group_id == 2)
+                                    <p data-size-id="{{ $item->attribute_id }}"
+                                        style="margin-right: 30px; font-weight: bold; cursor: pointer; border: 1px solid transparent; background-color: transparent;"
+                                        onclick="showSize(this)">{{ $item->name }}</p>
+                                @endif
+                            @endforeach
+                        </div>
                         @if ($prodetail->sale_price > 0)
                             <p class="product-price">
                                 <span>{{ number_format($prodetail->price) }}đ</span>{{ number_format($prodetail->sale_price) }}đ
@@ -64,6 +73,8 @@
                         <form action="{{ route('cart.add', $prodetail->id) }}" method="POST">
                             @csrf
                             <input type="hidden" name="attribute_color_id" id="selected-color">
+                            <input type="hidden" name="attribute_size_id" id="selected-size">
+
                             {{-- quantity --}}
                             <div class="quatity">
                                 <label for="">Số Lượng:</label>
@@ -155,36 +166,57 @@
             smartSpeed: 1000
         });
         document.addEventListener('DOMContentLoaded', function() {
-            const showMoreBtn = document.querySelector('.show-more-btn');
-            const fullDescription = document.querySelector('.full-description');
-            const firstColorButton = document.querySelector('[data-color-id]');
-    
-    // Nếu có màu sắc trong danh sách
-    if (firstColorButton) {
-        // Gọi hàm showImage() cho màu sắc đầu tiên
-        showImage(firstColorButton);
-    }
-            showMoreBtn.addEventListener('click', function() {
-                if (fullDescription.style.display === 'none') {
-                    fullDescription.style.display = 'block';
-                    showMoreBtn.textContent = 'Thu gọn';
-                } else {
-                    fullDescription.style.display = 'none';
-                    showMoreBtn.textContent = 'Xem thêm';
-                }
-            });
-        });
+    const showMoreBtn = document.querySelector('.show-more-btn');
+    const fullDescription = document.querySelector('.full-description');
+    const firstColorButton = document.querySelector('[data-color-id]');
+    const firstSizeButton = document.querySelector('[data-size-id]');
 
-        function showImage(element) {
+    if (firstColorButton) {
+        showColor(firstColorButton);
+    }
+    if (firstSizeButton) {
+            showSize(firstSizeButton);
+        
+    }
+    showMoreBtn.addEventListener('click', function() {
+        if (fullDescription.style.display === 'none') {
+            fullDescription.style.display = 'block';
+            showMoreBtn.textContent = 'Thu gọn';
+        } else {
+            fullDescription.style.display = 'none';
+            showMoreBtn.textContent = 'Xem thêm';
+        }
+    });
+});
+
+function showColor(element) {
     // Lấy dữ liệu từ các thuộc tính data của thẻ p
     const colorId = element.getAttribute('data-color-id');
-    
+
     // Đặt giá trị màu vào trường ẩn
     const selectedColorField = document.getElementById('selected-color');
     selectedColorField.value = colorId;
 
     // Xóa lớp active từ tất cả các thẻ p
     const paragraphs = document.querySelectorAll('[data-color-id]');
+    paragraphs.forEach(para => {
+        para.style.borderColor = 'transparent';
+    });
+
+    // Thêm lớp active cho thẻ p được chọn
+    element.style.borderColor = 'orange';
+}
+
+function showSize(element) {
+    // Lấy dữ liệu từ các thuộc tính data của thẻ p
+    const sizeId = element.getAttribute('data-size-id');
+
+    // Đặt giá trị kích cỡ vào trường ẩn
+    const selectedSizeField = document.getElementById('selected-size');
+    selectedSizeField.value = sizeId;
+
+    // Xóa lớp active từ tất cả các thẻ p
+    const paragraphs = document.querySelectorAll('[data-size-id]');
     paragraphs.forEach(para => {
         para.style.borderColor = 'transparent';
     });

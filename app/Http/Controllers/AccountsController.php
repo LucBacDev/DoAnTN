@@ -17,7 +17,7 @@ class AccountsController extends Controller
     }
     public function account_update($id)
     {
-        Users::find($id)->update(['role' => 1]);
+        Users::find($id)->update(['role' => 2]);
         return redirect()->back()->with('notification','Cập nhập Thành Công');
     }
     public function account_delete($id)

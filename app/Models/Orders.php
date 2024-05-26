@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes; // add soft delete
+
 
 class Orders extends Model
 {
@@ -17,4 +19,5 @@ class Orders extends Model
     {
         return $this->hasMany(Order_details::class,'id');
     }
+    
 }

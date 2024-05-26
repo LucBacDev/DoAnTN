@@ -17,6 +17,7 @@ class CreateAttributesTable extends Migration
             $table->id();
             $table->integer('attribute_group_id');
             $table->string('name',255);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

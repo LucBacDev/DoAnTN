@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('product_attribute_id');
             $table->integer('attribute_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -130,7 +130,7 @@ img {
 }
 .nav-menu ul li a {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 25px;
     padding: 0px 12px;
 }
 .nav-meta {
@@ -732,7 +732,7 @@ div.single-cart-item .cart-item-desc p.price {
     position: relative;
     z-index: 1;
     background-color: #252525;
-    padding: 70px 0 60px;
+    padding: 90px 0 60px;
 }
 .mb-30 {
     margin-bottom: 30px !important;

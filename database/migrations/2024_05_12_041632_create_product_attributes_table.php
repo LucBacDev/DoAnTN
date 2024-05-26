@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('product_attributes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->bigInteger('price');
+            $table->string('product_id');
             $table->bigInteger('stock');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

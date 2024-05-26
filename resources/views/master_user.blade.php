@@ -21,7 +21,8 @@
                     <nav class="nav-mie d-flex">
                         <!-- logo -->
                         <a href="{{ route('user.index') }}" class="logo-header">
-                            <img src="{{ url('assets-user') }}/img/core-img/logo.png" alt="" style="object-fit: cover; max-width: 150px; max-height: 200px;">
+                            <img src="{{ url('assets-user') }}/img/core-img/logo.png" alt=""
+                                style="object-fit: cover; max-width: 150px; max-height: 200px;">
                         </a>
                         <!-- end logo -->
                         <div class="nav-menu">
@@ -29,7 +30,7 @@
                                 @foreach ($Categories as $item)
                                     <li class="menu-item_shop">
                                         @if ($item->parent_id == 0)
-                                            <h1><a href="#" class="icon_shop">{{ $item->name }}</a></h1>
+                                            <a href="#" class="icon_shop">{{ $item->name }}</a>
                                             {{-- <a href="{{ route('product', $value->id) }}"> --}}
                                         @endif
 
@@ -37,7 +38,7 @@
                                             <ul class="single-mega" style="display: flex; flex-wrap: wrap;">
                                                 @foreach ($Categories as $itemcon)
                                                     @if ($item->id == $itemcon->parent_id)
-                                                        <li style="flex: 0 0 33.33%; padding: 10px;"><a
+                                                        <li style="padding: 10px;"><a
                                                                 href="{{ route('search_id', ['id' => $itemcon->id]) }}">{{ $itemcon->name }}</a>
                                                         </li>
                                                     @endif
@@ -51,170 +52,7 @@
                         <style>
 
                         </style>
-                        <div class="nav-menu nav-menu-none">
-                            <ul class="d-flex">
-                                <li class="menu-item_shop">
-                                    <a href="#" class="icon_shop">New<i class="fa-solid fa-check"></i></a>
-                                    <div class="megamenu">
-                                        <ul class="single-mega">
-                                            <li class="title">Women's Collection</li>
-                                            <li><a href="shop.html">Dresses</a></li>
-                                            <li><a href="shop.html">Blouses &amp; Shirts</a></li>
-                                            <li><a href="shop.html">T-shirts</a></li>
-                                            <li><a href="shop.html">Rompers</a></li>
-                                            <li><a href="shop.html">Bras &amp; Panties</a></li>
-                                        </ul>
-                                        <ul class="single-mega">
-                                            <li class="title">Men's Collection</li>
-                                            <li><a href="#">T-Shirts</a></li>
-                                            <li><a href="#">Polo</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Jackets</a></li>
-                                            <li><a href="#">Trench</a></li>
-                                        </ul>
-                                        <ul class="single-mega">
-                                            <li class="title">Kid's Collection</li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">T-shirts</a></li>
-                                            <li><a href="#">Jackets</a></li>
-                                            <li><a href="#">Trench</a></li>
-                                        </ul>
-                                        <div class="single-mega">
-                                            <img src="img/bg-img/bg-6.jpg" alt="">
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="menu-item_shop">
-                                    <a href="#" class="icon_shop">Men<i class="fa-solid fa-check"></i></a>
-                                    <div class="megamenu">
-                                        <ul class="single-mega">
-                                            <li class="title">Women's Collection</li>
-                                            <li><a href="shop.html">Dresses</a></li>
-                                            <li><a href="shop.html">Blouses &amp; Shirts</a></li>
-                                            <li><a href="shop.html">T-shirts</a></li>
-                                            <li><a href="shop.html">Rompers</a></li>
-                                            <li><a href="shop.html">Bras &amp; Panties</a></li>
-                                        </ul>
-                                        <ul class="single-mega">
-                                            <li class="title">Men's Collection</li>
-                                            <li><a href="#">T-Shirts</a></li>
-                                            <li><a href="#">Polo</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Jackets</a></li>
-                                            <li><a href="#">Trench</a></li>
-                                        </ul>
-                                        <ul class="single-mega">
-                                            <li class="title">Kid's Collection</li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">T-shirts</a></li>
-                                            <li><a href="#">Jackets</a></li>
-                                            <li><a href="#">Trench</a></li>
-                                        </ul>
-                                        <div class="single-mega">
-                                            <img src="img/bg-img/bg-6.jpg" alt="">
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="menu-item_shop">
-                                    <a href="#" class="icon_shop">Women<i class="fa-solid fa-check"></i></a>
-                                    <div class="megamenu">
-                                        <ul class="single-mega">
-                                            <li class="title">Women's Collection</li>
-                                            <li><a href="shop.html">Dresses</a></li>
-                                            <li><a href="shop.html">Blouses &amp; Shirts</a></li>
-                                            <li><a href="shop.html">T-shirts</a></li>
-                                            <li><a href="shop.html">Rompers</a></li>
-                                            <li><a href="shop.html">Bras &amp; Panties</a></li>
-                                        </ul>
-                                        <ul class="single-mega">
-                                            <li class="title">Men's Collection</li>
-                                            <li><a href="#">T-Shirts</a></li>
-                                            <li><a href="#">Polo</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Jackets</a></li>
-                                            <li><a href="#">Trench</a></li>
-                                        </ul>
-                                        <ul class="single-mega">
-                                            <li class="title">Kid's Collection</li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">T-shirts</a></li>
-                                            <li><a href="#">Jackets</a></li>
-                                            <li><a href="#">Trench</a></li>
-                                        </ul>
-                                        <div class="single-mega">
-                                            <img src="img/bg-img/bg-6.jpg" alt="">
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="menu-item_shop">
-                                    <a href="#" class="icon_shop">children<i class="fa-solid fa-check"></i></a>
-                                    <div class="megamenu">
-                                        <ul class="single-mega">
-                                            <li class="title">Women's Collection</li>
-                                            <li><a href="shop.html">Dresses</a></li>
-                                            <li><a href="shop.html">Blouses &amp; Shirts</a></li>
-                                            <li><a href="shop.html">T-shirts</a></li>
-                                            <li><a href="shop.html">Rompers</a></li>
-                                            <li><a href="shop.html">Bras &amp; Panties</a></li>
-                                        </ul>
-                                        <ul class="single-mega">
-                                            <li class="title">Men's Collection</li>
-                                            <li><a href="#">T-Shirts</a></li>
-                                            <li><a href="#">Polo</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Jackets</a></li>
-                                            <li><a href="#">Trench</a></li>
-                                        </ul>
-                                        <ul class="single-mega">
-                                            <li class="title">Kid's Collection</li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">T-shirts</a></li>
-                                            <li><a href="#">Jackets</a></li>
-                                            <li><a href="#">Trench</a></li>
-                                        </ul>
-                                        <div class="single-mega">
-                                            <img src="img/bg-img/bg-6.jpg" alt="">
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="menu-item_shop">
-                                    <a href="#" class="icon_shop">Kid's<i class="fa-solid fa-check"></i></a>
-                                    <div class="megamenu">
-                                        <ul class="single-mega">
-                                            <li class="title">Women's Collection</li>
-                                            <li><a href="shop.html">Dresses</a></li>
-                                            <li><a href="shop.html">Blouses &amp; Shirts</a></li>
-                                            <li><a href="shop.html">T-shirts</a></li>
-                                            <li><a href="shop.html">Rompers</a></li>
-                                            <li><a href="shop.html">Bras &amp; Panties</a></li>
-                                        </ul>
-                                        <ul class="single-mega">
-                                            <li class="title">Men's Collection</li>
-                                            <li><a href="#">T-Shirts</a></li>
-                                            <li><a href="#">Polo</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">Jackets</a></li>
-                                            <li><a href="#">Trench</a></li>
-                                        </ul>
-                                        <ul class="single-mega">
-                                            <li class="title">Kid's Collection</li>
-                                            <li><a href="#">Dresses</a></li>
-                                            <li><a href="#">Shirts</a></li>
-                                            <li><a href="#">T-shirts</a></li>
-                                            <li><a href="#">Jackets</a></li>
-                                            <li><a href="#">Trench</a></li>
-                                        </ul>
-                                        <div class="single-mega">
-                                            <img src="img/bg-img/bg-6.jpg" alt="">
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+
                         <!-- menu rps -->
                         <div class="classycloseIcon">
                             <i class="fa menu-toggle fa-bars"></i>
@@ -240,8 +78,7 @@
                     <div class="nav-meta d-flex">
                         <div class="search-area">
                             <form action="{{ route('search') }}" method="get">
-                                <input type="search" name="keyword" id="headerSearch"
-                                    placeholder="Từ khóa......">
+                                <input type="search" name="keyword" id="headerSearch" placeholder="Từ khóa......">
                                 <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </form>
                         </div>
@@ -302,12 +139,23 @@
                         </div>
                         <div class="card-body text-center">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <a href="{{ url('OrderManagement') }}" class="card-link">Purchased Orders</a>
-                                </li>
                                 @if (Auth::check())
                                     <li class="list-group-item">
-                                        <a href="{{ route('logout') }}" class="card-link">Log Out</a>
+                                        <a href="{{ route('user.cart', Auth::id()) }}" class="card-link">Đơn Hàng Đã
+                                            Mua</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="{{ route('edit-user', Auth::id()) }}" class="card-link">Tài khoản của tôi</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a class="text-muted" href="{{ route('user.mail-password') }}">Đổi mật khẩu</a>
+
+                                    </li>
+
+                                @endif
+                                @if (Auth::check())
+                                    <li class="list-group-item">
+                                        <a href="{{ route('logout') }}" class="card-link">Đăng xuất</a>
                                     </li>
                                 @else
                                     <li class="list-group-item">
@@ -333,28 +181,31 @@
         <!-- cart buton -->
 
         <!-- cart-list -->
-        <div class="container-fuild d-flex">
+        <div class="container-fluid d-flex">
             <div class="row">
                 <div class="col-4">
                     @if (!empty($cart))
-                        @foreach ($cart->getItem() as $item)
-                            <div class="single-cart-item">
-                                <a href="#" class="product-image">
-                                    <img src="{{ url('upload.product') }}/{{ $item['image'] }}" class="cart-thumb"
-                                        alt="">
-                                    <!-- Cart Item Desc -->
-                                    <div class="cart-item-desc">
-                                        <a class="product-remove" href="{{ route('cart.delete', $item['id']) }}">
-                                            <i class="fa fa-close" aria-hidden="true"></i>
-                                        </a>
-                                        <h6>{{ $item['name'] }}</h6>
-                                        <p class="color">Color: {{ $item['attribute_color_id'] }}</p>
-                                        <p class="color">Số Lượng: {{ $item['quantity'] }}</p>
-                                        <p class="price">{{ number_format($item['price']) }}đ</p>
-                                    </div>
-                                </a>
-                            </div>
-                        @endforeach
+                        <div class="cart-items-container" style="max-height: 500px; overflow-y: auto;">
+                            @foreach ($cart->getItem() as $item)
+                                <div class="single-cart-item">
+                                    <a href="#" class="product-image">
+                                        <img src="{{ url('upload.product') }}/{{ $item['image'] }}"
+                                            class="cart-thumb" alt="">
+                                        <!-- Cart Item Desc -->
+                                        <div class="cart-item-desc">
+                                            <a class="product-remove" href="{{ route('cart.delete', $item['id']) }}">
+                                                <i class="fa fa-close" aria-hidden="true"></i>
+                                            </a>
+                                            <h6>{{ $item['name'] }}</h6>
+                                            <p class="color">Màu sắc: {{ $item['attribute_color_id'] }}</p>
+                                            <p class="color">Kích cỡ: {{ $item['attribute_size_id'] }}</p>
+                                            <p class="color">Số Lượng: {{ $item['quantity'] }}</p>
+                                            <p class="price">{{ number_format($item['price']) }}đ</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
                     @endif
                 </div>
                 <!-- end cart-list -->
@@ -363,34 +214,36 @@
                 @if (Session()->get('cart'))
                     <div class="col-8">
                         <div class="cart-amount-summary">
-                            <h2>Summary</h2>
+                            <h2>Tóm tắt</h2>
                             <ul class="summary-table">
                                 <li class="d-flex justify-content-between">
-                                    <span>subtotal:</span>
+                                    <span>Tổng tiền:</span>
                                     <span>{{ number_format($cart->subTotalPrice()) }}đ</span>
                                 </li>
                                 <li class="d-flex justify-content-between">
-                                    <span>delivery:</span>
+                                    <span>Phí vận chuyển:</span>
                                     <span>30.000đ</span>
                                 </li>
                                 <li class="d-flex justify-content-between">
                                     @if (!empty($cart))
-                                        <span>total:</span> <span>{{ number_format($cart->totalPrice_ship()) }}đ</span>
+                                        <span>Tổng:</span> <span>{{ number_format($cart->totalPrice_ship()) }}đ</span>
                                     @endif
                                 </li>
                             </ul>
                             <div class="checkout-btn mt-100">
-                                <a href="{{ route('checkout') }}" class="btn check-btn">check out</a>
+                                <a href="{{ route('checkout') }}" class="btn check-btn">Thanh Toán</a>
                             </div>
                         </div>
                     </div>
                 @else
-                    <h5 class="text-center no-shopping" style="height: 72px;line-height: 80px;">You Have No Products
-                        In Shopping Cart !</h5>
+                    <h5 class="text-center no-shopping" style="height: 72px;line-height: 80px;">
+                        Bạn không có sản phẩm nào trong giỏ hàng!
+                    </h5>
                 @endif
-                <!--    end cart-summfary -->
+                <!--    end cart-summary -->
             </div>
         </div>
+
 
         <!-- cart-list -->
 
@@ -415,7 +268,8 @@
                     <div class="single_widget_area d-flex mb-30">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <img src="{{ url('assets-user') }}/img/core-img/logo.png" alt="" style="object-fit: cover; max-width: 150px; max-height: 200px;">
+                            <img src="{{ url('assets-user') }}/img/core-img/logo.png" alt=""
+                                style="object-fit: cover; max-width: 150px; max-height: 200px;">
                         </div>
                         <!-- Footer Menu -->
                         <div class="footer_menu">

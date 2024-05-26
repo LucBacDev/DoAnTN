@@ -5,7 +5,7 @@
         <div class="container h-100">
             <div class="row flex_center h-100">
                 <div class="col-12">
-                    <h2>checkout</h2>
+                    <h2>Thanh Toán</h2>
                 </div>
             </div>
         </div>
@@ -19,42 +19,50 @@
                     <div class="checkout_details_area">
 
                         <div class="cart-page-heading mb-3">
-                            <h5>Billing Address</h5>
+                            <h5>Thông tin khách hàng</h5>
                         </div>
 
                         <form action="#" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-12 mb-3">
-                                    <label for="first_name">Full name <span>*</span></label>
+                                    <label for="first_name">Họ và tên</label>
                                     <input type="text" class="form-control" name="full_name"
                                         value="{{ Auth::user()->full_name }}" required="">
                                 </div>
                                 <div class="col-12 mb-3">
-                                    <label for="email_address">Email <span>*</span></label>
+                                    <label for="email_address">Email</label>
                                     <input type="email" class="form-control" name="email"
                                         value="{{ Auth::user()->email }}">
                                 </div>
                                 <div class="col-12 mb-3">
-                                    <label for="phone_number">Phone No <span>*</span></label>
+                                    <label for="phone_number">Số điện thoại</label>
                                     <input type="number" class="form-control" name="phone" min="0"
                                         value="{{ Auth::user()->phone }}">
                                 </div>
                                 <div class="col-12 mb-3">
-                                    <label for="street_address">Address</label>
+                                    <label for="street_address">Địa chỉ</label>
                                     <input type="text" class="form-control" name="address"
                                         value="{{ Auth::user()->address }}">
                                 </div>
                                 <div class=" col-12 mb-3">
-                                    <label for="" class="form-label">Order notes</label>
+                                    <label for="" class="form-label">Ghi chú</label>
                                     <textarea class="form-control" id="" rows="3" name="note" value="note"></textarea>
                                 </div>
                                 <div class=" col-12 mb-3">
                                     <label for="exampleSelect1" class="control-label">Phương thức thanh toán</label>
-                                    <select class="form-control" id="exampleSelect1" name="payment_method" value="">
-
-                                        <option value="1"> Thanh toán khi nhận hàng</option>
+                                    <select class="form-control" id="paymentSelect" name="payment_method">
+                                        <option value="1">Thanh toán khi nhận hàng</option>
+                                        <option value="2">Thanh toán qua Vn-Pay</option>
                                     </select>
+
+                                    {{-- <script>
+                                        document.getElementById('paymentSelect').addEventListener('change', function() {
+                                            if (this.value == '2') {
+                                                document.getElementById('vnpayForm').submit();
+                                            }
+                                        });
+                                    </script> --}}
                                 </div>
                             </div>
                     </div>
@@ -63,17 +71,18 @@
                 <div class="col-12 col-md-9">
                     <div class="order-details-confirmation">
                         <div class="cart-page-heading">
-                            <h5 class="text-center pb-4">Your Order</h5>
+                            <h5 class="text-center pb-4">Đơn hàng của bạn</h5>
                         </div>
                         <tbody>
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col" colspan="2">Product</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Color</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col" class="text-end">Provisional Amount</th>
+                                        <th scope="col" colspan="2">Sản phẩm</th>
+                                        <th scope="col">Giá</th>
+                                        <th scope="col">Màu sắc</th>
+                                        <th scope="col">Kích cỡ</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col" class="text-end">Tổng tiền sản phẩm</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,13 +101,15 @@
                                             <th class="pd-15 product-price">{{ number_format($item['price']) }}</th>
 
                                             {{-- color --}}
-                                            @foreach ($attribute as $query)
-                                                @if ($item['attribute_color_id'] == $query->id)
-                                                    <td class="pd-15 product-color">
-                                                        {{ $query->name }}
-                                                    </td>
-                                                @endif
-                                            @endforeach
+                                            <td class="pd-15 product-color">
+                                                {{ $item['attribute_color_id'] }}
+                                            </td>
+
+                                            {{-- size --}}
+                                            <td class="pd-15 product-size">
+                                                {{ $item['attribute_size_id'] }}
+                                            </td>
+
                                             {{-- sl --}}
                                             <td class="pd-15 product-quantity text-center">
                                                 {{ $item['quantity'] }}
@@ -110,25 +121,25 @@
                                         </tr>
                                     @endforeach
                                     <tr>
-                                        <th class="pd-15" colspan="6">Transport fee: </th>
+                                        <th class="pd-15" colspan="6">Phí vận chuyển: </th>
                                         <th class="pd-15 text-end" colspan="1">30,000 đ</th>
                                     </tr>
                                     <tr>
-                                        <th class="pd-15" colspan="6">Total Money: </th>
+                                        <th class="pd-15" colspan="6">Tổng tiền: </th>
                                         <th class="pd-15 text-end" colspan="1">
                                             {{ number_format($cart->totalPrice_ship()) }}đ
                                         </th>
                                     </tr>
                                 </tbody>
                             </table>
-                            <button type="submit" class="btn-checkout"> <span style="color:white;font-weight:600">Proceed
-                                    to Payment</span> </button>
+                            <button type="submit" class="btn-checkout"> <span style="color:white;font-weight:600">Thanh
+                                    Toán</span> </button>
                     </div>
                 </div>
                 </form>
-                {{-- <form method="POST" action="{{ route('vnpay') }}">
-                    @csrf
-                    <button type="submit" name="redirect">Thanh toán qua VNPAY</button>
+                {{-- <form id="vnpayForm" action="{{ route('vnpay_payment') }}" method="POST" style="display:none;">
+                    @csrf <!-- Include the CSRF token for security -->
+                    <input type="hidden" name="payment_method" value="2">
                 </form> --}}
             </div>
         </div>

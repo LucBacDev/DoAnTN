@@ -22,7 +22,7 @@ class LoginAdmin
             return redirect()->route('admin.loginAdmin');
         }
         else{
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role == 1 || Auth::user()->role == 2) {
                 return $next($request);
             }else{
                 return redirect()->back()->with('notification', 'Đăng nhập không thành công');

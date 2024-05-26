@@ -6,6 +6,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use View;
 use Illuminate\Support\Facades\Route;
+use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('Categories', \App\Models\Categories::all());
             }
         });
+        Schema::defaultStringLength(191);
         // Paginator::currentPageResolver(function () {
         //     return request()->input('page') ?? 1;
         // });

@@ -2,7 +2,7 @@
 @section('content')
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách Tài Khoản Người Dùng</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><h1>Danh sách Tài Khoản Người Dùng</h1></a></li>
         </ul>
         <ul class="app-breadcrumb breadcrumb side ">
             <li class="breadcrumb-item active">
@@ -46,18 +46,24 @@
                                     <td>
                                         @if ($user->status === 1)
                                         <span class="bg bg-success">
-                                             Được Phép Sử Dụng
+                                             Đã kích hoạt
                                         </span>
                                         @else
                                         <span class="bg bg-danger">
-                                            Không Được phép
+                                            Chưa kích hoạt
                                        </span>
                                         @endif
                                     </td>
-                                    <td>{{$user->role == 1  ? 'Admin' :  'Người Dùng' }}</td>
+                                    @if ($user->role == 1)
+                                        <td>Admin</td>
+                                    @elseif($user->role == 2)
+                                        <td>Quản lý</td>
+                                    @else
+                                        <td>Người dùng</td>
+                                    @endif
                                     <td class="table-td-center">
-                                        @if ($user->role != 1)
-                                        <a type="submit" href="{{route('admin.account_update',$user->id)}}" class="btn btn-add">Cấp quyền admin</a>
+                                        @if ($user->role != 1 && $user->role != 2)
+                                        <a type="submit" href="{{route('admin.account_update',$user->id)}}" class="btn btn-add">Cấp quyền quản lý</a>
                                         @endif
                                         <a type="submit" href="{{route('admin.account_delete',$user->id)}}" class="btn btn-danger">Xóa</a>
                                     </td>

@@ -2,14 +2,14 @@
 @section('content')
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><h1>Danh sách sản phẩm</h1></a></li>
         </ul>
         <ul class="app-breadcrumb breadcrumb side ">
             <li class="breadcrumb-item active">
-                <form action="{{ route ('admin.product') }}" method="get">
+                <form action="{{ route('admin.product') }}" method="get">
                     <div class="input-group z-index-0">
-                        <input type="text" name="keyword" class="input-search form-control rounded" placeholder="Nhập tên sản phẩm"
-                            aria-label="Search" aria-describedby="search-addon" />
+                        <input type="text" name="keyword" class="input-search form-control rounded"
+                            placeholder="Nhập tên sản phẩm" aria-label="Search" aria-describedby="search-addon" />
                         <button type="submit" class="btn-search btn btn-outline-primary">Search</button>
                     </div>
                 </form>
@@ -19,10 +19,15 @@
 
     {{-- allert notification --}}
     @if (session('notification'))
-        <div class="alert alert-success">
-            {{ session('notification') }}
-        </div>
-    @endif
+            <div id="notification" class="alert alert-success text-center">
+                {{ session('notification') }}
+            </div>
+        @endif
+        <script>
+            setTimeout(function() {
+                document.getElementById('notification').style.display = 'none';
+            }, 10000); // 10 giây
+        </script>
     {{-- allert notification end --}}
     <div class="row">
         <div class="col-md-12">
@@ -40,55 +45,52 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Tên Sản Phẩm</th>
-                                <th>Giá</th>
+                                <th>Giá Gốc</th>
                                 <th>Giá Khuyến Mại</th>
-                                <th>Màu: Số lượng</th>
                                 <th>Trạng Thái</th>
-                                <th>Xuất Sứ</th>
-                                <th>Năm Sản Xuất</th>
                                 <th>Danh Mục</th>
-                                <th>Thương Hiệu</th>
                                 <th>Tính Năng</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($products as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration}}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->price }}</td>
-                                    <td>{{ $item->sale_price }}</td>
-                                    <td>
-                                        @foreach ($products_atb as $value)
-                                            @if ($value->product_id == $item->id)
-                                                @foreach ($attribute as $query)
-                                                    @if ($value->attribute_color_id == $query->id)
-                                                        <p>{{ $query->name }}: {{ $value->stock }}</p>
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        @endforeach
-                                    </td>
-                                    @if ($item->status == 1)
-                                        <td class="m-3 p-1 badge bg-success">Đang bán</td>
-                                    @else
-                                        <td class="m-3 p-1 badge bg-danger">Ngừng bán</td>
-                                    @endif
-                                    <td>{{ $item->origin }}</td>
-                                    <td>{{ $item->year }}</td>
-                                    <td>{{ $item->getCategoryName->name }}</td>
-                                    <td>{{ $item->getBrandName->name }}</td>
-                                    <td class="table-td-center">
-                                        <a href="{{ route('admin.product_update_show', $item->id) }}" type="submit"
-                                            class="btn btn-success">Sửa</a>
-                                        <a href="{{ route('admin.product_delete', $item->id) }}" type="submit"
-                                            class="btn btn-danger" onclick = "return confirm('Bạn có muốn xóa?')">Xóa</a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                        {{-- <tbody> --}}
+                        @foreach ($products as $item)
+                            <tr class="clickable-row" data-href="{{ route('admin.product_detail', $item->id) }}">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->price }}</td>
+                                <td>{{ $item->sale_price }}</td>
+                                @if ($item->status == true)
+                                    <td class="m-3 p-1 badge bg-success">Đang bán</td>
+                                @else
+                                    <td class="m-3 p-1 badge bg-danger">Ngừng bán</td>
+                                @endif
+                                <td>{{ $item->getCategoryName->name }}</td>
+                                <td class="table-td-center">
+                                    <a href="{{ route('admin.product_update_show', $item->id) }}" type="submit"
+                                        class="btn btn-success">Sửa</a>
+                                    <a href="{{ route('admin.product_delete', $item->id) }}" type="submit"
+                                        class="btn btn-danger" onclick = "return confirm('Bạn có muốn xóa?')">Xóa</a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </table>
                 </div>
-
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var rows = document.querySelectorAll('.clickable-row');
+                        rows.forEach(function(row) {
+                            row.addEventListener('click', function() {
+                                window.location.href = row.dataset.href;
+                            });
+                        });
+                        var buttons = document.querySelectorAll('.table-td-center');
+                        buttons.forEach(function(button) {
+                            button.addEventListener('click', function(event) {
+                                event.stopPropagation();
+                            });
+                        });
+                    });
+                </script>
             </div>
         </div>
     </div>
